@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>{{processo.titulo}}</h2>
+
+<mat-dialog-content class="table-container"   [ngStyle]="{'height': 'calc(' + screamTela + 'px - 150px)', 'min-height': 'calc(' + screamTela + 'px - 150px)'}">
+  <div >
+    <div class="grid-container">
+      <mat-card class="dashboard-card" *ngFor="let parecer of pareceres" style="background: #dfe8e8;">
+        <mat-card-header>
+          <mat-card-title>
+            Usuário: {{parecer.usuario.nome}}
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item (click)="editarParecer(parecer)">Alterar</button>
+              <button mat-menu-item (click)="deletarParecer(parecer)">Deletar</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <p>
+            <b>Status:</b> {{parecer.status}}</p>
+          <p>
+            <b>Descrição:</b> {{parecer.descricao}}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+  <button mat-raised-button color="primary" matTooltip="Novo Processo"(click)="openSelecionarUsuarioModal()">
+    <mat-icon>add_circle</mat-icon>    
+  </button>
+
+  <button mat-raised-button color="primary" matTooltip="Fechar" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+</mat-dialog-actions>

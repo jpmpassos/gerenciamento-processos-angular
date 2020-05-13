@@ -1,0 +1,71 @@
+<form [formGroup]="usuarioForm" novalidate (ngSubmit)="salvar()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Cadastro de Usuário</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Nome" formControlName="nome">
+            <mat-error *ngIf="usuarioForm.controls['nome'].hasError('required')">
+              Nome é um registro
+              <strong>obrigatório</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row wrap" *ngIf="!edicao">
+        <div class="col" >
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Login" formControlName="login">
+            <mat-error *ngIf="usuarioForm.controls['login'].hasError('required')">
+              Login é um registro
+              <strong>obrigatório</strong>
+            </mat-error>
+            <mat-error *ngIf="usuarioForm.controls['login'].hasError('min')">
+              Login deve conter no mínumo
+              <strong>6</strong> caracteres.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col" >
+          <mat-form-field class="full-width">
+            <input matInput type="password" placeholder="Senha" formControlName="senha">
+            <mat-error *ngIf="usuarioForm.controls['senha'].hasError('required')">
+              Senha é um registro
+              <strong>obrigatório</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col" >
+          <mat-form-field class="full-width">
+            <input matInput type="password" placeholder="Confir. Senha" formControlName="senhaConfirmacao">
+            <mat-error *ngIf="usuarioForm.controls['senhaConfirmacao'].hasError('required')">
+              Confirmação da Senha é um registro
+              <strong>obrigatório</strong>
+            </mat-error>
+            <mat-error
+              *ngIf="!usuarioForm.controls['senhaConfirmacao'].hasError('required') && !usuarioForm.controls['senhaConfirmacao'].hasError('confirmarSenhas')">
+              Senhas não confere
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <section matInput class="example-section">
+            <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-checkbox matInput class="example-margin" formControlName="admin">Admistrador</mat-checkbox>
+              <mat-checkbox matInput class="example-margin" formControlName="triador">Triador</mat-checkbox>
+              <mat-checkbox matInput class="example-margin" formControlName="finalizador">Finalizador</mat-checkbox>
+            </div>
+          </section>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button [disabled]="usuarioForm.invalid" color="primary" type="submit">Salvar</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

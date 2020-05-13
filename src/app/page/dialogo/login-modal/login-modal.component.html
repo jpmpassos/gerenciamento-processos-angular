@@ -1,0 +1,25 @@
+<form [formGroup]="loginForm" novalidate (ngSubmit)="logar()">
+  <h2 mat-dialog-title>Tela de Login</h2>
+
+  <mat-dialog-content class="table-container">
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Login" formControlName="login">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Senha" type="password" formControlName="senha">
+        </mat-form-field>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit">Logar</button>
+  </mat-dialog-actions>
+</form>

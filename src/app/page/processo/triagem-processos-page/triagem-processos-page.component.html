@@ -1,0 +1,68 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Lista de Processos</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="example-container mat-elevation-z8" [ngStyle]="{'height': 'calc(' + screamTela + 'px - 200px)', 'min-height': 'calc(' + screamTela + 'px - 200px)'}">
+      <table mat-table [dataSource]="processos" multiTemplateDataRows class="mat-elevation-z8">
+
+        <ng-container matColumnDef="opcoes">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button aria-label="Editar Processo" (click)="editarProcesso(element)"
+              matTooltip="Editar Processo">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button aria-label="Deletar Processo" (click)="deletarProcesso(element)"
+              matTooltip="Deletar Processo">
+              <mat-icon>delete</mat-icon>
+            </button>
+        </ng-container>
+
+        <ng-container matColumnDef="processoId">
+          <th mat-header-cell *matHeaderCellDef> Código </th>
+          <td mat-cell *matCellDef="let element"> {{element.processoId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="titulo">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="parecer">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button aria-label="Lista de Pareceres" (click)="openListaParecerModal(element)"
+              matTooltip="Lista de Pareceres">
+              <mat-icon>list</mat-icon>
+            </button>
+        </ng-container>
+
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let element" [attr.colspan]="3">
+            <div class="example-element-detail" [@detailExpand]="element == processo ? 'expanded' : 'collapsed'">
+              <div class="example-element-description">
+                Descrição = {{element.descricao}}
+                <br />
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+          [class.example-expanded-row]="processo === element"
+          (click)="processo = processo === element ? null : element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" matTooltip="Novo Processo" routerLink="/processo">
+      <mat-icon>add_circle</mat-icon>
+      Novo Processo
+    </button>
+  </mat-card-actions>
+</mat-card>

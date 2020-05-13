@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Erro</h2>
+
+<mat-dialog-content class="table-container">
+  <div *ngFor="let e of erros">
+    <p>
+      <b>
+        {{e.mensagemUsuario}}
+      </b>
+    </p>
+    <p>
+      {{e.mensagemDesenvolvedor}}
+    </p>
+  </div>  
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="warn" matTooltip="Ok" (click)="close()">
+    Ok
+  </button>
+</mat-dialog-actions>
